@@ -1,5 +1,7 @@
 import Product from "../models/Product";
 import * as Yup from 'yup';
+import qr from 'qr-image';
+import fs from 'fs';
 
 class ProductController {
   async store(req, res) {
@@ -27,6 +29,7 @@ class ProductController {
       image
     } = req.body;
 
+
     try {
       const product = await Product.create({
         name,
@@ -35,6 +38,14 @@ class ProductController {
         quantity,
         image
       });
+
+      const { _id } = product;
+      /** substituir site google pelo site da aplicação com o id do produto em questão */
+      
+      const qr_png= qr.image('http://www.google.com/', { type: 'png' });
+      const qrcode = fs.createWriteStream(`qrcodes/${_id}.png`);
+  
+      qr_png.pipe(qrcode);  
 
       return res.status(200).json(product);
 
