@@ -1,15 +1,14 @@
 import express from 'express';
 import globalRoutes from './routes/globalRoutes';
-import Mongoose from 'mongoose';
+import connectDB from './config/db';
+
 import 'dotenv/config';
+
+connectDB();
+
 
 const server = express();
 server.use(express.json());
-
-Mongoose.connect(process.env.DB_MONGO, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
 
 server.use(globalRoutes);
 
