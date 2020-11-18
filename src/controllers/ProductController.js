@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 class ProductController {
   async store(req, res) {
 
+    /** PARA TESTAR NO INSOMIA: SALVAR PRIMEIRO UMA IMAGEM E USAR ID DA IMAGEM EM IMAGE */
+
     const schemaValidation = Yup.object().shape({
       name: Yup.string().required(),
       description: Yup.string().required(),
