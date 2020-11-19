@@ -20,17 +20,25 @@ class UserController {
 
     const { name, username, email, password } = req.body;
 
+    /*** acho que não vamos precisar de username */
+    const usernameExist = await User.findOne({ username });
+    const emailExist = await User.findOne({ email });
+
+    if (emailExist || usernameExist) {
+      return res.status(400).json({ error: 'email or username already exist' });
+    }
+
     const passwordhash = await auth.hashPassword(password);
 
     try {
-      const user = await User.create({
+      const { id } = await User.create({
         name,
         username,
         email,
         passwordhash,
       });
 
-      return res.status(200).json(user);
+      return res.status(200).json({ id, name, username, email });
     } catch (err) {
       return res.status(400).json(err);
     }
