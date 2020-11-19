@@ -1,14 +1,11 @@
 import Product from "../models/Product";
-<<<<<<< HEAD
 import * as Yup from 'yup';
 import qr from 'qr-image';
 import fs from 'fs';
 import generatePDF from '../config/pdf';
-=======
 import * as Yup from "yup";
 import qr from "qr-image";
 import fs from "fs";
->>>>>>> upstream/main
 
 class ProductController {
   async store(req, res) {
@@ -41,16 +38,9 @@ class ProductController {
 
       const { _id } = product;
       /** substituir site google pelo site da aplicação com o id do produto em questão */
-<<<<<<< HEAD
-      
-      const qr_png= qr.image('http://localhost:3333/:id', { type: 'png' });
-      const qrcode = fs.createWriteStream(`qrcodes/${_id}.png`);
-      qr_png.pipe(qrcode);  
-=======
 
       const qr_png = qr.image("http://www.google.com/", { type: "png" });
       const qrcode = fs.createWriteStream(`qrcodes/${_id}.png`);
->>>>>>> upstream/main
 
       qr_png.pipe(qrcode);
 

@@ -14,14 +14,11 @@ routes.post("/product", ProductController.store);
 /*Rotas de Imagem*/
 routes.post("/image", ImageController.store);
 
-<<<<<<< HEAD
 routes.post('/product', ProductController.store);
 // routes.get('/:id', )
 routes.post('/image', ImageController.store);
-=======
 /*Rotas de Usuário*/
 routes.post("/user", upload.none(), UserController.store);
 routes.post("/user/signin", upload.none(), UserController.signin);
->>>>>>> upstream/main
 
 export default routes;
