@@ -43,35 +43,6 @@ class UserController {
       return res.status(400).json(err);
     }
   }
-
-  async signin(req, res) {
-    /*A validação se os dados foram preenchidos ou não devem ser feitos via Yup?*/
-
-    const { email, password } = req.body;
-
-    const userExist = await User.findOne({ email });
-
-    if (!userExist) {
-      return res.status(422).json({ error: "email isn't registered" });
-    }
-
-    const isValid = await auth.validadePassword(
-      password,
-      userExist.passwordhash
-    );
-
-    if (!isValid) {
-      return res.status(422).json({ error: "incorrect password" });
-    }
-
-    const id = userExist._id;
-    const name = userExist.name;
-
-    /*req.session.isLoggedIn = true;*/
-    /*req.session.user = { id, name };*/
-
-    return res.status(200).json({ id, name });
-  }
 }
 
 export default new UserController();
