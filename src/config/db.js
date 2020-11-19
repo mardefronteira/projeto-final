@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
@@ -9,11 +9,10 @@ const connectDB = async () => {
     });
 
     console.log(`banco conectado ${conn.connection.host}`);
-    
-  } catch(err) {
+  } catch (err) {
     console.error(`erro: ${err.message}`);
     process.exit(1);
-  } 
-}
+  }
+};
 
 export default connectDB;
