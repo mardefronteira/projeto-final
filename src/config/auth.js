@@ -22,11 +22,7 @@ class auth {
   }
 
   authCheck(req, res) {
-    if (!req.session.isLoggedIn || !req.session.user.userID) {
-      res.status(401).json({ error: "You are not authorized" });
-    } else {
-      res.status(200);
-    }
+    /*autenticação via JWT*/
   }
 }
 

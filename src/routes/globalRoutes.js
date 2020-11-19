@@ -4,6 +4,7 @@ import multer from "multer";
 import ProductController from "../controllers/ProductController";
 import ImageController from "../controllers/ImageController";
 import UserController from "../controllers/UserController";
+import AuthController from "../controllers/AuthController";
 
 const routes = new Router();
 const upload = multer();
@@ -16,6 +17,8 @@ routes.post("/image", ImageController.store);
 
 /*Rotas de Usuário*/
 routes.post("/user", upload.none(), UserController.store);
-routes.post("/user/signin", upload.none(), UserController.signin);
+
+/*Rotas de Login*/
+routes.post("/signin", upload.none(), AuthController.signin);
 
 export default routes;
