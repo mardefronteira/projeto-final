@@ -1,4 +1,8 @@
 import Product from "../models/Product";
+import * as Yup from 'yup';
+import qr from 'qr-image';
+import fs from 'fs';
+import generatePDF from '../config/pdf';
 import * as Yup from "yup";
 import qr from "qr-image";
 import fs from "fs";
