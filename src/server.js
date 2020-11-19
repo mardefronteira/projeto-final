@@ -17,4 +17,4 @@ server.use(globalRoutes);
 server.use('/files', express.static(path.resolve(__dirname, '..', 'uploads') ))
 server.use('/qrcode', express.static(path.resolve(__dirname, '..', 'qrcodes') ))
 
-server.listen(3333);
+server.listen(process.env.PORT);
