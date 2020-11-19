@@ -16,5 +16,6 @@ routes.post("/image", ImageController.store);
 
 /*Rotas de Usuário*/
 routes.post("/user", upload.none(), UserController.store);
+routes.post("/user/signin", upload.none(), UserController.signin);
 
 export default routes;

@@ -3,7 +3,7 @@ import argon2 from "argon2";
 class auth {
   async hashPassword(password) {
     try {
-      return argon2.hash(password);
+      return await argon2.hash(password);
     } catch (err) {
       /*Ver qual tipo de erro seria retornado aqui*/
     }
@@ -22,7 +22,7 @@ class auth {
   }
 
   authCheck(req, res) {
-    if (!req.session.isLoggedIn || !req.session.user.user_id) {
+    if (!req.session.isLoggedIn || !req.session.user.userID) {
       res.status(401).json({ error: "You are not authorized" });
     } else {
       res.status(200);
