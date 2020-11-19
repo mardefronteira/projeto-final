@@ -9,7 +9,17 @@ class auth {
     }
   }
 
-  async validadePassword(password, passwordhash) {}
+  async validadePassword(password, passwordhash) {
+    try {
+      if (await argon2.verify(passwordhash, password)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      /*Ver qual tipo de erro seria retornado aqui*/
+    }
+  }
 
   authCheck(req, res) {
     if (!req.session.isLoggedIn || !req.session.user.user_id) {
