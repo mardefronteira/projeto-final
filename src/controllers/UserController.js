@@ -7,8 +7,8 @@ class UserController {
   async store(req, res) {
     const schemaValidation = Yup.object().shape({
       name: Yup.string().required(),
-      email: Yup.string().required().email().min(5),
-      password: Yup.string().required(),
+      email: Yup.string().required().email(),
+      password: Yup.string().required().min(5),
     });
 
     const checkSchema = await schemaValidation.isValid(req.body);
