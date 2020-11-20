@@ -25,6 +25,6 @@ routes.post("/user", upload.none(), UserController.store);
 routes.post("/signin", upload.none(), AuthController.signin);
 
 /*Rota para testar Auth*/
-routes.get("/", AuthController.authUser, function(req, res){ res.json({ id : req.userID })});
+routes.get("/", AuthController.authUser, function(req, res){ res.json({ user : req.user })});
 
 export default routes;
