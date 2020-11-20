@@ -5,6 +5,7 @@ import ProductController from "../controllers/ProductController";
 import ImageController from "../controllers/ImageController";
 import UserController from "../controllers/UserController";
 import AuthController from "../controllers/AuthController";
+import AuthMiddleware from '../middlewares/AuthMiddleware';
 
 const routes = new Router();
 const upload = multer();
@@ -21,6 +22,8 @@ destroy – Remove o dado
  * 
  */
 
+/*Rotas de Login*/
+routes.post("/signin", upload.none(), AuthController.store);
 
 /*Rotas de Produto*/
 routes.post("/product", ProductController.store);
@@ -30,13 +33,13 @@ routes.post("/image", ImageController.store);
 
 /*Rotas de Usuário*/
 routes.post("/user", upload.none(), UserController.store);
-routes.put("/user", upload.none(), AuthController.authUser, UserController.update);
-routes.delete("/user", AuthController.authUser, UserController.delete);
 
-/*Rotas de Login*/
-routes.post("/signin", upload.none(), AuthController.store);
+/*Rotas privadas de Usuário*/
+routes.put("/user", upload.none(), AuthMiddleware, UserController.update);
+routes.delete("/user", AuthMiddleware, UserController.delete);
+
 
 /*Rota para testar Auth*/
-routes.get("/", AuthController.authUser, function(req, res){ res.json({ user : req.user })});
+routes.get("/", AuthMiddleware, function(req, res){ res.json({ user : req.user })});
 
 export default routes;
