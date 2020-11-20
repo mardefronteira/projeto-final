@@ -2,10 +2,10 @@ import Product from "../models/Product";
 import * as Yup from 'yup';
 import qr from 'qr-image';
 import fs from 'fs';
-import generatePDF from '../config/pdf';
 import * as Yup from "yup";
 import qr from "qr-image";
 import fs from "fs";
+import QrcodeProduct from "../models/QrcodeProduct";
 
 class ProductController {
   async store(req, res) {
@@ -37,12 +37,17 @@ class ProductController {
       });
 
       const { _id } = product;
-      /** substituir site google pelo site da aplicação com o id do produto em questão */
 
+      /** ATENÇÃO: posteriormente substituir site google pelo site da aplicação com o id do produto em questão */
       const qr_png = qr.image("http://www.google.com/", { type: "png" });
       const qrcode = fs.createWriteStream(`qrcodes/${_id}.png`);
 
       qr_png.pipe(qrcode);
+
+      QrcodeProduct.create({
+        filename: name,
+        product: _id,
+      })
 
       return res.status(200).json(product);
     } catch (err) {
