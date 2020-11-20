@@ -1,6 +1,8 @@
 import User from "../models/User";
 import auth from "../config/auth";
 
+import jwt from "jsonwebtoken";
+
 class AuthController {
     async signin(req, res) {
         /*A validação se os dados foram preenchidos ou não devem ser feitos via Yup?*/
@@ -23,11 +25,10 @@ class AuthController {
         }
     
         const id = userExist._id;
-        const name = userExist.name;
+
+        const token = jwt.sign({ id }, process.env.SECRET);
     
-        /*salvar token JWT*/
-    
-        return res.status(200).json({ id, name });
+        return res.status(200).json({ auth : true, token });
       }
 }
 
