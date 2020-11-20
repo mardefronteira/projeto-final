@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 
 const ProductSchema = new Schema(
@@ -20,7 +19,7 @@ const ProductSchema = new Schema(
       required: true,
     },
     image: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "ImageProduct",
     },
   },

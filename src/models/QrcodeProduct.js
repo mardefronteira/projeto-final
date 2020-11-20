@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const mongoose = require("mongoose");
 
 const QrcodeProductSchema = new Schema(
   {
@@ -12,7 +11,7 @@ const QrcodeProductSchema = new Schema(
       type: String,
     },
     product: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Product",
     },
   },

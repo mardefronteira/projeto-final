@@ -40,7 +40,7 @@ class ProductController {
 
       /** ATENÇÃO: posteriormente substituir site google pelo site da aplicação com o id do produto em questão */
       const qr_png = qr.image("http://www.google.com/", { type: "png" });
-      const qrcode = fs.createWriteStream(`qrcodes/${_id}.png`);
+      const qrcode = fs.createWriteStream(`tmp/qrcodes/${_id}.png`);
 
       qr_png.pipe(qrcode);
 
