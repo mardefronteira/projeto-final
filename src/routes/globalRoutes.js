@@ -18,6 +18,7 @@ routes.post("/image", ImageController.store);
 /*Rotas de Usuário*/
 routes.post("/user", upload.none(), UserController.store);
 routes.put("/user", upload.none(), AuthController.authUser, UserController.update);
+routes.delete("/user", AuthController.authUser, UserController.delete);
 
 /*Rotas de Login*/
 routes.post("/signin", upload.none(), AuthController.signin);

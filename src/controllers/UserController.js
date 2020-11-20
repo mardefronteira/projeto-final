@@ -46,13 +46,23 @@ class UserController {
 
   async update(req, res) {
     try {
-      await User.findOneAndUpdate(
-        { _id: req.user.id },
-        req.body,
-        { new: true, useFindAndModify: false }
-      );
+      await User.findOneAndUpdate({ _id: req.user.id }, req.body, {
+        useFindAndModify: false,
+      });
 
+      /*Rever qual mensagem utilizar no update*/
       return res.status(200).json(req.body);
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      await User.findByIdAndDelete({ _id: req.user.id });
+
+      /*Rever qual mensagem utilizar no delete*/
+      return res.status(200).json({ message: "user deleted" });
     } catch (err) {
       return res.status(400).json(err);
     }
