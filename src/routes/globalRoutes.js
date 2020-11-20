@@ -15,11 +15,9 @@ routes.post("/product", ProductController.store);
 /*Rotas de Imagem*/
 routes.post("/image", ImageController.store);
 
-routes.post('/product', ProductController.store);
-// routes.get('/:id', )
-routes.post('/image', ImageController.store);
 /*Rotas de Usuário*/
 routes.post("/user", upload.none(), UserController.store);
+routes.put("/user", upload.none(), AuthController.authUser, UserController.update);
 
 /*Rotas de Login*/
 routes.post("/signin", upload.none(), AuthController.signin);

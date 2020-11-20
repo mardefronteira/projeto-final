@@ -43,6 +43,20 @@ class UserController {
       return res.status(400).json(err);
     }
   }
+
+  async update(req, res) {
+    try {
+      await User.findOneAndUpdate(
+        { _id: req.user.id },
+        req.body,
+        { new: true, useFindAndModify: false }
+      );
+
+      return res.status(200).json(req.body);
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  }
 }
 
 export default new UserController();

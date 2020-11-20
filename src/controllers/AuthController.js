@@ -25,8 +25,6 @@ class AuthController {
     const token = jwt.sign(
       {
         id: userExist._id,
-        name: userExist.name,
-        email: userExist.email,
         admin: userExist.admin,
       },
       process.env.SECRET
