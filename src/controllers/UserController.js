@@ -7,8 +7,7 @@ class UserController {
   async store(req, res) {
     const schemaValidation = Yup.object().shape({
       name: Yup.string().required(),
-      username: Yup.string().required(),
-      email: Yup.string().required().email(),
+      email: Yup.string().required().email().min(5),
       password: Yup.string().required(),
     });
 
@@ -18,14 +17,12 @@ class UserController {
       return res.status(400).json({ error: "validations fails" });
     }
 
-    const { name, username, email, password } = req.body;
+    const { name, email, password } = req.body;
 
-    /*** acho que não vamos precisar de username */
-    const usernameExist = await User.findOne({ username });
     const emailExist = await User.findOne({ email });
 
-    if (emailExist || usernameExist) {
-      return res.status(400).json({ error: "email or username already exist" });
+    if (emailExist) {
+      return res.status(400).json({ error: "email already exist" });
     }
 
     const passwordhash = await auth.hashPassword(password);
@@ -33,12 +30,11 @@ class UserController {
     try {
       const { id } = await User.create({
         name,
-        username,
         email,
         passwordhash,
       });
 
-      return res.status(200).json({ id, name, username, email });
+      return res.status(200).json({ id, name, email });
     } catch (err) {
       return res.status(400).json(err);
     }

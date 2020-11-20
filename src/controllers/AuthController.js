@@ -4,7 +4,7 @@ import auth from "../config/auth";
 import jwt from "jsonwebtoken";
 
 class AuthController {
-  async signin(req, res) {
+  async store(req, res) {
     const { email, password } = req.body;
 
     const userExist = await User.findOne({ email });

@@ -7,12 +7,6 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    /*Username é necessário? ou validaremos apenas com e-mail?*/
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     email: {
       type: String,
       required: true,
