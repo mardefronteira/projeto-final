@@ -20,10 +20,6 @@ class auth {
       /*Ver qual tipo de erro seria retornado aqui*/
     }
   }
-
-  authCheck(req, res) {
-    /*autenticação via JWT*/
-  }
 }
 
 export default new auth();
