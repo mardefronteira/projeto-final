@@ -22,9 +22,13 @@ class AuthController {
       return res.status(422).json({ error: "incorrect password" });
     }
 
-    const id = userExist._id;
-
-    const token = jwt.sign({ id }, process.env.SECRET);
+    const token = jwt.sign(
+      {
+        id: userExist._id,
+        admin: userExist.admin,
+      },
+      process.env.SECRET
+    );
 
     return res.status(200).json({ auth: true, token });
   }
@@ -33,16 +37,17 @@ class AuthController {
     const token = req.headers["x-access-token"];
 
     if (!token) {
-        return res.status(401).json({ auth: false, error: "No token provided" });
+      return res.status(401).json({ auth: false, error: "No token provided" });
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.SECRET);
+      req.user = jwt.verify(token, process.env.SECRET);
 
-        req.userID = decoded.id;
-        next();
+      next();
     } catch (err) {
-        return res.status(500).json({ auth: false, error: "Failed to authenticate token" });
+      return res
+        .status(500)
+        .json({ auth: false, error: "Failed to authenticate token" });
     }
   }
 }
