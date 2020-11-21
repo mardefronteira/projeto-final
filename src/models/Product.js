@@ -22,6 +22,10 @@ const ProductSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "ImageProduct",
     },
+    sold: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
