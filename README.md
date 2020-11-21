@@ -1,4 +1,4 @@
-# Projeto Final
+# ALL Bertinho
 
 ## .env
 ```
@@ -15,5 +15,5 @@ DB_MONGO=mongodb+srv://<clustername>:<password>@cluster0.acbkw.mongodb.net/<dbna
 
 ## lembretes
 ```
-Batizar o projeto!!
+Estamos a 10 commits sem nenhum acidente, nosso recorde é de 35 commits!
 ```
