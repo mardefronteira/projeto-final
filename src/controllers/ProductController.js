@@ -85,7 +85,7 @@ class ProductController {
       const { image } = await Product.findById({ _id: id });
       await ImageProduct.findByIdAndDelete(image);
       await Product.findByIdAndDelete(id);
-      await QrcodeProduct.findOneAndRemove({ product: id });
+      await QrcodeProduct.findOneAndDelete({ product: id });
       
       fs.unlink(`tmp/qrcodes/${id}.png`, function (err){
         if (err) throw err;
