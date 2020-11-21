@@ -14,7 +14,7 @@ const server = express();
 server.use(express.json());
 
 server.use(globalRoutes);
-server.use('/files', express.static(path.resolve(__dirname, '..', 'uploads') ))
-server.use('/qrcode', express.static(path.resolve(__dirname, '..', 'qrcodes') ))
+server.use('/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads') ))
+server.use('/qrcode', express.static(path.resolve(__dirname, '..', 'tmp', 'qrcodes') ))
 
 server.listen(process.env.PORT);

@@ -27,9 +27,12 @@ routes.post("/signin", upload.none(), AuthController.store);
 
 /*Rotas de Produto*/
 routes.post("/product", ProductController.store);
+routes.put("/product/:id", ProductController.update);
+routes.delete("/product/:id", ProductController.delete);
 
 /*Rotas de Imagem*/
 routes.post("/image", ImageController.store);
+routes.put("/image/:id", ImageController.update); /*(o id se refere ao id do produto que se quer modificar a imagem)*/
 
 /*Rotas de Usuário*/
 routes.post("/user", upload.none(), UserController.store);
