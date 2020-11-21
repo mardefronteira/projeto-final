@@ -1,5 +1,5 @@
+
 import User from "../models/User";
-import auth from "../config/auth";
 
 import * as Yup from "yup";
 
@@ -25,13 +25,11 @@ class UserController {
       return res.status(400).json({ error: "email already exist" });
     }
 
-    const passwordhash = await auth.hashPassword(password);
-
     try {
       const { id } = await User.create({
         name,
         email,
-        passwordhash,
+        password,
       });
 
       return res.status(200).json({ id, name, email });
@@ -41,8 +39,28 @@ class UserController {
   }
 
   async update(req, res) {
+    const schemaValidation = Yup.object().shape({
+      name: Yup.string().min(3),
+      email: Yup.string().email().min(5),
+      password: Yup.string().min(6),
+    });
+
+    const checkSchema = await schemaValidation.isValid(req.body);
+
+    if (!checkSchema) {
+      return res.status(400).json({ error: "validations fails" });
+    }
+
+    const emailExist = await User.findOne({ email : req.body.email });
+
+    if (emailExist) {
+      return res.status(400).json({ error: "email already exist" });
+    }
+
     try {
-      await User.findOneAndUpdate({ _id: req.user.id }, req.body);
+      await User.findOneAndUpdate({ _id: req.user.id }, req.body, {
+        useFindAndModify: false,
+      });
 
       /*Rever qual mensagem utilizar no update*/
       return res.status(200).json(req.body);

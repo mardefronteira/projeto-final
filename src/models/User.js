@@ -11,7 +11,7 @@ const UserSchema = new Schema(
       required: true,
       unique: true,
     },
-    passwordhash: {
+    password: {
       type: String,
       required: true,
     },
@@ -24,5 +24,18 @@ const UserSchema = new Schema(
     timestamps: true,
   }
 );
+
+UserSchema.pre("save", async function(next) {
+  if (!this.isModified("password")) return next();
+
+  try {
+    const hash = await argon2.hash(this.password);
+
+    this.password = hash;
+    next();
+  } catch (err) {
+    return next(err);
+  }
+});
 
 module.exports = model("User", UserSchema);
