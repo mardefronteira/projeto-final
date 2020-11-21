@@ -6,8 +6,8 @@ import * as Yup from "yup";
 class UserController {
   async store(req, res) {
     const schemaValidation = Yup.object().shape({
-      name: Yup.string().required(),
-      email: Yup.string().required().email(),
+      name: Yup.string().required().min(3),
+      email: Yup.string().required().email().min(5),
       password: Yup.string().required().min(5),
     });
 
@@ -42,9 +42,7 @@ class UserController {
 
   async update(req, res) {
     try {
-      await User.findOneAndUpdate({ _id: req.user.id }, req.body, {
-        useFindAndModify: false,
-      });
+      await User.findOneAndUpdate({ _id: req.user.id }, req.body);
 
       /*Rever qual mensagem utilizar no update*/
       return res.status(200).json(req.body);
