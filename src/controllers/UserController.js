@@ -1,6 +1,5 @@
 
 import User from "../models/User";
-import auth from "../config/auth";
 
 import * as Yup from "yup";
 
@@ -26,13 +25,11 @@ class UserController {
       return res.status(400).json({ error: "email already exist" });
     }
 
-    const passwordhash = await auth.hashPassword(password);
-
     try {
       const { id } = await User.create({
         name,
         email,
-        passwordhash,
+        password,
       });
 
       return res.status(200).json({ id, name, email });
